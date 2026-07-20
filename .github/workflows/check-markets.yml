@@ -1,0 +1,36 @@
+# This file tells GitHub to run the notifier automatically.
+
+name: Check NASCAR markets
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"   # every 15 minutes (GitHub may add a few min of delay)
+  workflow_dispatch: {}       # also lets you press a "Run" button manually
+
+permissions:
+  contents: write             # allows the run to save state.json back to the repo
+
+concurrency:
+  group: market-check
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get the code
+        uses: actions/checkout@v4
+
+      - name: Run the notifier
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
+        run: python3 notifier.py
+
+      - name: Save memory of what we've seen
+        run: |
+          git config user.name "market-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add state.json
+          git diff --cached --quiet || git commit -m "update seen markets"
+          git push
