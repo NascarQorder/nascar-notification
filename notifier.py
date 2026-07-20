@@ -1,14 +1,19 @@
 """
-NASCAR Market Notifier  (v2)
+NASCAR Market Notifier  (v4)
 ----------------------------
-Checks two places for newly-opened NASCAR betting markets:
-  1. Kalshi (free public API)
-  2. Major sportsbooks via The Odds API (free events endpoint = 0 credits)
+Pings your phone when NASCAR betting markets open, per source:
 
-New in v2:
-  - Pauses politely between Kalshi pages and retries when rate-limited (fixes 429 errors)
-  - Each source "seeds" its memory separately on its first successful check,
-    so a failed run can never cause missed or duplicate notifications
+  Kalshi        -> a ping for every new NASCAR market (free API)
+  Sportsbooks   -> a ping when a race FIRST appears at any book, then
+                   "watch mode": re-checks that race every couple hours and
+                   pings you as EACH book (DK, Caesars, MGM, FanDuel, ...)
+                   opens its own odds. Watch ends when the board fills up
+                   or after a few days.
+
+Credit budget (The Odds API free tier = 500/month):
+  - detecting new races: 0 credits (events endpoint is free)
+  - each watch-mode check: 1 credit
+  - typical race: 15-40 credits total. Plenty of headroom.
 """
 
 import json
@@ -25,15 +30,21 @@ KALSHI_KEYWORDS = ["nascar"]
 
 NTFY_TOPIC = os.environ.get("NTFY_TOPIC", "").strip()
 ODDS_API_KEY = os.environ.get("ODDS_API_KEY", "").strip()
-FETCH_EARLY_ODDS = os.environ.get("FETCH_EARLY_ODDS", "yes").lower() == "yes"
+
+# Watch-mode dials (safe defaults; change via repo secrets only if needed)
+WATCH_CHECK_HOURS = float(os.environ.get("WATCH_CHECK_HOURS", "2"))   # hours between odds checks per race
+WATCH_MAX_DAYS = float(os.environ.get("WATCH_MAX_DAYS", "3"))         # give up watching after this long
+WATCH_DONE_AT_BOOKS = int(os.environ.get("WATCH_DONE_AT_BOOKS", "10"))  # stop once this many books posted
+
+
+def now_utc():
+    return datetime.now(timezone.utc)
 
 
 def http_get_json(url, tries=3):
-    """Fetch a URL and return parsed JSON. Backs off and retries if the
-    site says 'slow down' (error 429). Returns None if it truly fails."""
     for attempt in range(tries):
         try:
-            req = urllib.request.Request(url, headers={"User-Agent": "nascar-notify/2.0"})
+            req = urllib.request.Request(url, headers={"User-Agent": "nascar-notify/4.0"})
             with urllib.request.urlopen(req, timeout=30) as resp:
                 return json.loads(resp.read().decode("utf-8"))
         except urllib.error.HTTPError as e:
@@ -75,18 +86,19 @@ def load_state():
     for src in ("kalshi", "oddsapi"):
         state.setdefault(src, {})
         state.setdefault(src + "_seeded", False)
+    state.setdefault("watching", {})
     return state
 
 
 def save_state(state):
-    state["last_checked"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
+    state["last_checked"] = now_utc().isoformat(timespec="seconds")
     with open(STATE_FILE, "w") as f:
         json.dump(state, f, indent=2, sort_keys=True)
 
 
+# ---------------------------------------------------------------- kalshi
+
 def get_kalshi_nascar_events():
-    """Walk Kalshi's open events pages (politely, with pauses).
-    Returns (found_dict, completed_ok)."""
     found = {}
     cursor = ""
     pages = 0
@@ -106,14 +118,14 @@ def get_kalshi_nascar_events():
         pages += 1
         if not cursor:
             break
-        time.sleep(0.7)  # be polite between pages so Kalshi doesn't block us
+        time.sleep(0.7)
     print(f"  Kalshi: {len(found)} open NASCAR event(s) found across {pages} page(s)")
     return found, True
 
 
+# ---------------------------------------------------------------- odds api
+
 def get_odds_api_nascar_events():
-    """List upcoming NASCAR events at the books (all free calls).
-    Returns (found_dict, completed_ok)."""
     if not ODDS_API_KEY:
         print("  (ODDS_API_KEY not set — skipping sportsbook check)")
         return {}, False
@@ -123,7 +135,7 @@ def get_odds_api_nascar_events():
     keys = [s["key"] for s in sports if "nascar" in s.get("key", "").lower()
             or "nascar" in s.get("title", "").lower()]
     if not keys:
-        print("  Odds API: no NASCAR listed right now (offseason or between races) — that's fine")
+        print("  Odds API: no NASCAR listed right now (between races/offseason) — that's fine")
         return {}, True
     found = {}
     for key in keys:
@@ -140,28 +152,44 @@ def get_odds_api_nascar_events():
     return found, True
 
 
-def get_early_favorite(sport_key, event_id):
-    """Spend 1 credit to peek at fresh odds and name the favorite."""
-    if not FETCH_EARLY_ODDS:
-        return ""
+def _fmt(price):
+    return f"+{price}" if price > 0 else str(price)
+
+
+def get_books_snapshot(sport_key, event_id):
+    """Spend 1 credit: returns {book_title: 'favorite +price'} for every
+    US book that currently has this race posted. None on failure."""
     url = (f"{ODDS_BASE}/sports/{sport_key}/events/{event_id}/odds"
            f"?apiKey={ODDS_API_KEY}&regions=us&markets=outrights&oddsFormat=american")
     data = http_get_json(url)
-    if not data or not data.get("bookmakers"):
-        return ""
-    try:
-        book = data["bookmakers"][0]
-        outcomes = book["markets"][0]["outcomes"]
-        fav = min(outcomes, key=lambda o: o.get("price", 999999))
-        price = fav["price"]
-        price_str = f"+{price}" if price > 0 else str(price)
-        return f"Early favorite: {fav['name']} {price_str} ({book.get('title', 'book')})"
-    except Exception:
-        return ""
+    if data is None:
+        return None
+    books = {}
+    for book in data.get("bookmakers", []):
+        title = book.get("title", "?")
+        fav_text = ""
+        try:
+            outcomes = book["markets"][0]["outcomes"]
+            fav = min(outcomes, key=lambda o: o.get("price", 999999))
+            fav_text = f"{fav['name']} {_fmt(fav['price'])}"
+        except Exception:
+            pass
+        books[title] = fav_text
+    return books
 
+
+def hours_since(iso_string):
+    try:
+        then = datetime.fromisoformat(iso_string)
+        return (now_utc() - then).total_seconds() / 3600.0
+    except Exception:
+        return 999999
+
+
+# ---------------------------------------------------------------- main
 
 def main():
-    print(f"Run at {datetime.now(timezone.utc).isoformat(timespec='seconds')}")
+    print(f"Run at {now_utc().isoformat(timespec='seconds')}")
     state = load_state()
 
     print("Checking Kalshi...")
@@ -169,16 +197,14 @@ def main():
     print("Checking sportsbooks (The Odds API)...")
     odds_now, odds_ok = get_odds_api_nascar_events()
 
-    # ---- Kalshi side
+    # ---- Kalshi: one ping per new market
     if kalshi_ok:
         if not state["kalshi_seeded"]:
             state["kalshi"] = dict(kalshi_now)
             state["kalshi_seeded"] = True
-            send_notification(
-                "Kalshi tracking is live",
-                f"Now watching Kalshi — {len(kalshi_now)} existing NASCAR market(s) "
-                "memorized. You'll get a ping for anything NEW.",
-            )
+            send_notification("Kalshi tracking is live",
+                              f"Now watching Kalshi — {len(kalshi_now)} existing NASCAR "
+                              "market(s) memorized. You'll get a ping for anything NEW.")
         else:
             for ticker, title in kalshi_now.items():
                 if ticker not in state["kalshi"]:
@@ -188,26 +214,61 @@ def main():
     else:
         print("  (Kalshi check incomplete — memory untouched, will retry next run)")
 
-    # ---- Sportsbook side
+    # ---- Sportsbooks: race-level detection + per-book watch mode
     if odds_ok:
         if not state["oddsapi_seeded"]:
             state["oddsapi"] = {i: odds_now[i]["name"] for i in odds_now}
             state["oddsapi_seeded"] = True
-            send_notification(
-                "Sportsbook tracking is live",
-                f"Now watching the books — {len(odds_now)} existing NASCAR event(s) "
-                "memorized. You'll get a ping for anything NEW.",
-            )
+            send_notification("Sportsbook tracking is live",
+                              f"Now watching the books — {len(odds_now)} existing NASCAR "
+                              "event(s) memorized. New races get per-book open alerts.")
         else:
             for event_id, info in odds_now.items():
-                if event_id not in state["oddsapi"]:
-                    extra = get_early_favorite(info["sport"], event_id)
-                    when = info["commence"][:10] if info["commence"] else "TBA"
-                    body = f"{info['name']} (race day: {when})"
-                    if extra:
-                        body += f"\n{extra}"
-                    send_notification("Books just posted a NASCAR market", body)
+                if event_id in state["oddsapi"]:
+                    continue
+                # Brand-new race: ping, then start watching for per-book opens
+                snapshot = get_books_snapshot(info["sport"], event_id) or {}
+                when = info["commence"][:10] if info["commence"] else "TBA"
+                if snapshot:
+                    first_books = ", ".join(sorted(snapshot.keys()))
+                    body = (f"{info['name']} (race day: {when})\n"
+                            f"Open so far: {first_books}\n"
+                            "Watching for the rest of the books...")
+                else:
+                    body = f"{info['name']} (race day: {when})\nWatching for books to post odds..."
+                send_notification("New NASCAR race at the books", body)
+                state["watching"][event_id] = {
+                    "sport": info["sport"],
+                    "name": info["name"],
+                    "books": sorted(snapshot.keys()),
+                    "started": now_utc().isoformat(timespec="seconds"),
+                    "last_check": now_utc().isoformat(timespec="seconds"),
+                }
             state["oddsapi"].update({i: odds_now[i]["name"] for i in odds_now})
+
+        # -- Watch mode: re-check watched races on their own slower clock
+        for event_id in list(state["watching"].keys()):
+            w = state["watching"][event_id]
+            age_days = hours_since(w["started"]) / 24.0
+            if age_days > WATCH_MAX_DAYS or len(w["books"]) >= WATCH_DONE_AT_BOOKS:
+                print(f"  watch ended for: {w['name']} ({len(w['books'])} books posted)")
+                del state["watching"][event_id]
+                continue
+            if hours_since(w["last_check"]) < WATCH_CHECK_HOURS:
+                continue  # not due yet — costs nothing
+            snapshot = get_books_snapshot(w["sport"], event_id)
+            w["last_check"] = now_utc().isoformat(timespec="seconds")
+            if snapshot is None:
+                continue
+            new_books = [b for b in snapshot if b not in w["books"]]
+            for b in sorted(new_books):
+                fav = snapshot[b]
+                body = f"{w['name']}"
+                if fav:
+                    body += f"\nTheir favorite: {fav}"
+                send_notification(f"{b} just opened NASCAR odds", body)
+            w["books"] = sorted(set(w["books"]) | set(snapshot.keys()))
+            print(f"  watching {w['name']}: {len(w['books'])} book(s) posted")
     else:
         print("  (sportsbook check incomplete — memory untouched, will retry next run)")
 
