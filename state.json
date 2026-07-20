@@ -4,10 +4,12 @@
     "KXNASCARCHALLENGE-26": "NASCAR In-Season Challenge Winner",
     "KXNASCARCUPSEASON-26": "NASCAR Cup Series Regular Season Champion",
     "KXNASCARCUPSERIES-NCS26": "NASCAR Cup Series Champion",
+    "KXNASCARRACE-BRI4PB26": "Brickyard 400 presented by PPG Winner",
+    "KXNASCARRACE-PEN2PBT5O26": "Pennzoil 250 presented by Take 5 Oil Change Winner",
     "KXNASCARTRUCKSERIES-NTS26": "NASCAR Truck Series Champion"
   },
   "kalshi_seeded": true,
-  "last_checked": "2026-07-20T20:11:15+00:00",
+  "last_checked": "2026-07-20T21:14:41+00:00",
   "oddsapi": {},
   "oddsapi_seeded": true
 }
