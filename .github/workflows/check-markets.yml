@@ -4,7 +4,7 @@ name: Check NASCAR markets
 
 on:
   schedule:
-    - cron: "*/15 * * * *"   # every 15 minutes (GitHub may add a few min of delay)
+    - cron: "*/10 * * * *"   # every 15 minutes (GitHub may add a few min of delay)
   workflow_dispatch: {}       # also lets you press a "Run" button manually
 
 permissions:
