@@ -4,12 +4,22 @@
     "KXNASCARCHALLENGE-26": "NASCAR In-Season Challenge Winner",
     "KXNASCARCUPSEASON-26": "NASCAR Cup Series Regular Season Champion",
     "KXNASCARCUPSERIES-NCS26": "NASCAR Cup Series Champion",
+    "KXNASCARFASTLAP-BRI4PB26": "NASCAR Brickyard 400 presented by PPG: Fastest Lap",
+    "KXNASCARFASTLAP-PEN2PBT5O26": "NASCAR Pennzoil 250 presented by Take 5 Oil Change: Fastest Lap",
     "KXNASCARRACE-BRI4PB26": "Brickyard 400 presented by PPG Winner",
     "KXNASCARRACE-PEN2PBT5O26": "Pennzoil 250 presented by Take 5 Oil Change Winner",
+    "KXNASCARTOP10-BRI4PB26": "NASCAR Brickyard 400 presented by PPG: Top 10 Finishers",
+    "KXNASCARTOP10-PEN2PBT5O26": "NASCAR Pennzoil 250 presented by Take 5 Oil Change: Top 10 Finishers",
+    "KXNASCARTOP20-BRI4PB26": "NASCAR Brickyard 400 presented by PPG: Top 20 Finishers",
+    "KXNASCARTOP3-BRI4PB26": "NASCAR Brickyard 400 presented by PPG: Top 3 Finishers",
+    "KXNASCARTOP3-PEN2PBT5O26": "NASCAR Pennzoil 250 presented by Take 5 Oil Change: Top 3 Finishers",
+    "KXNASCARTOP5-BRI4PB26": "NASCAR Brickyard 400 presented by PPG: Top 5 Finishers",
+    "KXNASCARTOPTEAM-BRI4PB26": "NASCAR Brickyard 400 presented by PPG Team Winner",
+    "KXNASCARTOPTEAM-PEN2PBT5O26": "NASCAR Pennzoil 250 presented by Take 5 Oil Change Team Winner",
     "KXNASCARTRUCKSERIES-NTS26": "NASCAR Truck Series Champion"
   },
   "kalshi_seeded": true,
-  "last_checked": "2026-07-20T21:35:01+00:00",
+  "last_checked": "2026-07-20T22:37:47+00:00",
   "oddsapi": {},
   "oddsapi_seeded": true
 }
