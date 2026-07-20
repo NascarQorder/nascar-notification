@@ -1,5 +1,13 @@
 {
-  "kalshi": {},
-  "last_checked": "2026-07-20T17:55:54+00:00",
-  "oddsapi": {}
+  "kalshi": {
+    "KXNASCARAUTOPARTSSERIES-NAPS26": "NASCAR O'Reilly Auto Parts Series Champion",
+    "KXNASCARCHALLENGE-26": "NASCAR In-Season Challenge Winner",
+    "KXNASCARCUPSEASON-26": "NASCAR Cup Series Regular Season Champion",
+    "KXNASCARCUPSERIES-NCS26": "NASCAR Cup Series Champion",
+    "KXNASCARTRUCKSERIES-NTS26": "NASCAR Truck Series Champion"
+  },
+  "kalshi_seeded": true,
+  "last_checked": "2026-07-20T18:08:11+00:00",
+  "oddsapi": {},
+  "oddsapi_seeded": false
 }
