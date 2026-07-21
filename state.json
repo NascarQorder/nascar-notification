@@ -21,10 +21,12 @@
     "KXNASCARTOP5-BRI4PB26": "NASCAR Brickyard 400 presented by PPG: Top 5 Finishers",
     "KXNASCARTOPTEAM-BRI4PB26": "NASCAR Brickyard 400 presented by PPG Team Winner",
     "KXNASCARTOPTEAM-PEN2PBT5O26": "NASCAR Pennzoil 250 presented by Take 5 Oil Change Team Winner",
+    "KXNASCARTOPTEAM-TSP2PBW26": "NASCAR TSport 200 presented by Warn Industries Team Winner",
     "KXNASCARTRUCKSERIES-NTS26": "NASCAR Truck Series Champion"
   },
   "kalshi_seeded": true,
-  "last_checked": "2026-07-20T23:38:25+00:00",
+  "last_checked": "2026-07-21T00:04:18+00:00",
   "oddsapi": {},
-  "oddsapi_seeded": true
+  "oddsapi_seeded": true,
+  "watching": {}
 }
