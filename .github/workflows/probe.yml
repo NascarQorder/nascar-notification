@@ -1,0 +1,15 @@
+# Manual probe — runs only when you press the button, never on a schedule.
+# Put this at:  .github/workflows/probe.yml
+
+name: Prop market probe
+
+on:
+  workflow_dispatch: {}
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run probe
+        run: python3 probe.py
