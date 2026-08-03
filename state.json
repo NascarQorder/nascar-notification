@@ -9,6 +9,7 @@
     "KXNASCARFASTLAP-TSP2PBW26": "NASCAR TSport 200 presented by Warn Industries: Fastest Lap",
     "KXNASCARH2H-BRI4PB26TOGIRYBL": "NASCAR Matchup: Gilliland vs Blaney",
     "KXNASCARRACE-BRI4PB26": "Brickyard 400 presented by PPG Winner",
+    "KXNASCARRACE-IOWC3PB26": "Iowa Corn 350 Powered by Ethanol Winner",
     "KXNASCARRACE-PEN2PBT5O26": "Pennzoil 250 presented by Take 5 Oil Change Winner",
     "KXNASCARRACE-TSP2PBW26": "TSport 200 presented by Warn Industries Winner",
     "KXNASCARTOP10-BRI4PB26": "NASCAR Brickyard 400 presented by PPG: Top 10 Finishers",
@@ -25,7 +26,7 @@
     "KXNASCARTRUCKSERIES-NTS26": "NASCAR Truck Series Champion"
   },
   "kalshi_seeded": true,
-  "last_checked": "2026-08-03T20:14:33+00:00",
+  "last_checked": "2026-08-03T21:34:34+00:00",
   "oddsapi": {},
   "oddsapi_seeded": true,
   "watching": {}
