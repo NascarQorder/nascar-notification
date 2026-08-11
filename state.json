@@ -12,6 +12,7 @@
     "KXNASCARFASTLAP-PEN2PBT5O26": "NASCAR Pennzoil 250 presented by Take 5 Oil Change: Fastest Lap",
     "KXNASCARFASTLAP-TSP2PBW26": "NASCAR TSport 200 presented by Warn Industries: Fastest Lap",
     "KXNASCARH2H-BRI4PB26TOGIRYBL": "NASCAR Matchup: Gilliland vs Blaney",
+    "KXNASCARPOLE-COOO81526": "Cook Out 400 Qualifying Session: Pole Position",
     "KXNASCARRACE-BLAT2PBBRAR26": "Black's Tire 250 presented by BTS Rewards at Richmond Raceway Winner",
     "KXNASCARRACE-BRI4PB26": "Brickyard 400 presented by PPG Winner",
     "KXNASCARRACE-COOO81526": "Cook Out 400 Winner",
@@ -49,7 +50,7 @@
     "KXNASCARTRUCKSERIES-NTS26": "NASCAR Truck Series Champion"
   },
   "kalshi_seeded": true,
-  "last_checked": "2026-08-11T20:29:06+00:00",
+  "last_checked": "2026-08-11T21:23:42+00:00",
   "oddsapi": {},
   "oddsapi_seeded": true,
   "watching": {}
