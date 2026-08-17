@@ -16,9 +16,11 @@
     "KXNASCARRACE-BLAT2PBBRAR26": "Black's Tire 250 presented by BTS Rewards at Richmond Raceway Winner",
     "KXNASCARRACE-BRI4PB26": "Brickyard 400 presented by PPG Winner",
     "KXNASCARRACE-COOO81526": "Cook Out 400 Winner",
+    "KXNASCARRACE-DOLT26": "Dollar Tree 301 Winner",
     "KXNASCARRACE-HYVP26": "HyVee Perks 250 Winner",
     "KXNASCARRACE-IOWC3PB26": "Iowa Corn 350 Powered by Ethanol Winner",
     "KXNASCARRACE-PEN2PBT5O26": "Pennzoil 250 presented by Take 5 Oil Change Winner",
+    "KXNASCARRACE-TEAE26": "Team EJP 175 Winner",
     "KXNASCARRACE-TSP2PBW26": "TSport 200 presented by Warn Industries Winner",
     "KXNASCARTOP10-BLAT2PBBRAR26": "NASCAR Black's Tire 250 presented by BTS Rewards at Richmond Raceway: Top 10 Finishers",
     "KXNASCARTOP10-BRI4PB26": "NASCAR Brickyard 400 presented by PPG: Top 10 Finishers",
@@ -50,7 +52,7 @@
     "KXNASCARTRUCKSERIES-NTS26": "NASCAR Truck Series Champion"
   },
   "kalshi_seeded": true,
-  "last_checked": "2026-08-17T21:04:09+00:00",
+  "last_checked": "2026-08-17T21:38:28+00:00",
   "oddsapi": {},
   "oddsapi_seeded": true,
   "watching": {}
