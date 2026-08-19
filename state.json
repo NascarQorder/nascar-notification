@@ -1,6 +1,7 @@
 {
   "kalshi": {
     "KXNASCARAUTOPARTSSERIES-NAPS26": "NASCAR O'Reilly Auto Parts Series Champion",
+    "KXNASCARBIGGESTMOVER-DOLT26": "Dollar Tree 301: Biggest Mover",
     "KXNASCARCHALLENGE-26": "NASCAR In-Season Challenge Winner",
     "KXNASCARCUPSEASON-26": "NASCAR Cup Series Regular Season Champion",
     "KXNASCARCUPSERIES-NCS26": "NASCAR Cup Series Champion",
@@ -63,7 +64,7 @@
     "KXNASCARTRUCKSERIES-NTS26": "NASCAR Truck Series Champion"
   },
   "kalshi_seeded": true,
-  "last_checked": "2026-08-19T23:27:41+00:00",
+  "last_checked": "2026-08-19T23:49:26+00:00",
   "oddsapi": {},
   "oddsapi_seeded": true,
   "watching": {}
