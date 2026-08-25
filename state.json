@@ -17,6 +17,7 @@
     "KXNASCARFASTLAP-TSP2PBW26": "NASCAR TSport 200 presented by Warn Industries: Fastest Lap",
     "KXNASCARFASTLAP-WIN2PB26": "NASCAR Winn-Dixie 250 Powered by Coca-Cola : Fastest Lap",
     "KXNASCARH2H-BRI4PB26TOGIRYBL": "NASCAR Matchup: Gilliland vs Blaney",
+    "KXNASCARPOLE-COKZS26": "Coke Zero Sugar 400 Qualifying Session: Pole Position",
     "KXNASCARPOLE-COOO81526": "Cook Out 400 Qualifying Session: Pole Position",
     "KXNASCARPOLE-DOLT26": "Dollar Tree 301 Qualifying Session: Pole Position",
     "KXNASCARRACE-BLAT2PBBRAR26": "Black's Tire 250 presented by BTS Rewards at Richmond Raceway Winner",
@@ -76,7 +77,7 @@
     "KXNASCARTRUCKSERIES-NTS26": "NASCAR Truck Series Champion"
   },
   "kalshi_seeded": true,
-  "last_checked": "2026-08-25T22:44:43+00:00",
+  "last_checked": "2026-08-25T23:12:42+00:00",
   "oddsapi": {},
   "oddsapi_seeded": true,
   "watching": {}
