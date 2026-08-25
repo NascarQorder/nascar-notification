@@ -64,6 +64,7 @@
     "KXNASCARTOP5-IOWC3PB26": "NASCAR Iowa Corn 350 Powered by Ethanol: Top 5 Finishers",
     "KXNASCARTOPTEAM-BLAT2PBBRAR26": "NASCAR Black's Tire 250 presented by BTS Rewards at Richmond Raceway Team Winner",
     "KXNASCARTOPTEAM-BRI4PB26": "NASCAR Brickyard 400 presented by PPG Team Winner",
+    "KXNASCARTOPTEAM-COKZS26": "NASCAR Coke Zero Sugar 400 Team Winner",
     "KXNASCARTOPTEAM-COOO81526": "NASCAR Cook Out 400 Team Winner",
     "KXNASCARTOPTEAM-DOLT26": "NASCAR Dollar Tree 301 Team Winner",
     "KXNASCARTOPTEAM-HYVP26": "NASCAR HyVee Perks 250 Team Winner",
@@ -71,10 +72,11 @@
     "KXNASCARTOPTEAM-PEN2PBT5O26": "NASCAR Pennzoil 250 presented by Take 5 Oil Change Team Winner",
     "KXNASCARTOPTEAM-TEAE26": "NASCAR Team EJP 175 Team Winner",
     "KXNASCARTOPTEAM-TSP2PBW26": "NASCAR TSport 200 presented by Warn Industries Team Winner",
+    "KXNASCARTOPTEAM-WIN2PB26": "NASCAR Winn-Dixie 250 Powered by Coca-Cola  Team Winner",
     "KXNASCARTRUCKSERIES-NTS26": "NASCAR Truck Series Champion"
   },
   "kalshi_seeded": true,
-  "last_checked": "2026-08-25T00:24:49+00:00",
+  "last_checked": "2026-08-25T02:04:28+00:00",
   "oddsapi": {},
   "oddsapi_seeded": true,
   "watching": {}
