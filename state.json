@@ -29,9 +29,11 @@
     "KXNASCARRACE-COOO81526": "Cook Out 400 Winner",
     "KXNASCARRACE-COOOS26": "Cook Out Southern 500 Winner",
     "KXNASCARRACE-DOLT26": "Dollar Tree 301 Winner",
+    "KXNASCARRACE-ENJI26": "Enjoy Illinois 300 Winner",
     "KXNASCARRACE-FLE26": "Fleetio 200 Winner",
     "KXNASCARRACE-HYVP26": "HyVee Perks 250 Winner",
     "KXNASCARRACE-IOWC3PB26": "Iowa Corn 350 Powered by Ethanol Winner",
+    "KXNASCARRACE-NUW2PBBASBB26": "Nu Way 225 Powered by Bobcat and Sauced by Blues Hog Winner",
     "KXNASCARRACE-PEN2PBT5O26": "Pennzoil 250 presented by Take 5 Oil Change Winner",
     "KXNASCARRACE-TEAE26": "Team EJP 175 Winner",
     "KXNASCARRACE-TSP2PBW26": "TSport 200 presented by Warn Industries Winner",
@@ -90,7 +92,7 @@
     "KXNASCARTRUCKSERIES-NTS26": "NASCAR Truck Series Champion"
   },
   "kalshi_seeded": true,
-  "last_checked": "2026-09-08T17:38:02+00:00",
+  "last_checked": "2026-09-08T20:17:26+00:00",
   "oddsapi": {},
   "oddsapi_seeded": true,
   "watching": {}
