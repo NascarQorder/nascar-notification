@@ -151,6 +151,7 @@
     "KXNASCARTOPTEAM-ENJI26": "NASCAR Enjoy Illinois 300 Team Winner",
     "KXNASCARTOPTEAM-FLE26": "NASCAR Fleetio 200 Team Winner",
     "KXNASCARTOPTEAM-FOOC91826": "NASCAR Food City 300 Team Winner",
+    "KXNASCARTOPTEAM-FREI26": "NASCAR Freeway Insurance 500: Top Team",
     "KXNASCARTOPTEAM-HOLC26": "NASCAR Hollywood Casino 400: Top Team",
     "KXNASCARTOPTEAM-HYVP26": "NASCAR HyVee Perks 250 Team Winner",
     "KXNASCARTOPTEAM-IOWC3PB26": "NASCAR Iowa Corn 350 Powered by Ethanol Team Winner",
@@ -165,7 +166,7 @@
     "KXNASCARTRUCKSERIES-NTS26": "NASCAR Truck Series Champion"
   },
   "kalshi_seeded": true,
-  "last_checked": "2026-10-12T23:37:17+00:00",
+  "last_checked": "2026-10-13T03:52:49+00:00",
   "oddsapi": {},
   "oddsapi_seeded": true,
   "watching": {}
