@@ -34,6 +34,7 @@
     "KXNASCARPOLE-DOLT26": "Dollar Tree 301 Qualifying Session: Pole Position",
     "KXNASCARRACE-BANOA26": "Bank of America 400 Winner",
     "KXNASCARRACE-BASPSN26": "Bass Pro Shops Night Race Winner",
+    "KXNASCARRACE-BLAC26": "Black\u2019s Tire 200 Winner",
     "KXNASCARRACE-BLAT2PBBRAR26": "Black's Tire 250 presented by BTS Rewards at Richmond Raceway Winner",
     "KXNASCARRACE-BLUCN26": "Blue Cross NC 250 Winner",
     "KXNASCARRACE-BRI4PB26": "Brickyard 400 presented by PPG Winner",
@@ -51,6 +52,7 @@
     "KXNASCARRACE-HYVP26": "HyVee Perks 250 Winner",
     "KXNASCARRACE-IOWC3PB26": "Iowa Corn 350 Powered by Ethanol Winner",
     "KXNASCARRACE-LOVRS26": "Love's RV Stop 225 Winner",
+    "KXNASCARRACE-NATI26": "National Debt Relief 250 Winner",
     "KXNASCARRACE-NUW2PBBASBB26": "Nu Way 225 Powered by Bobcat and Sauced by Blues Hog Winner",
     "KXNASCARRACE-PEN2PBT5O26": "Pennzoil 250 presented by Take 5 Oil Change Winner",
     "KXNASCARRACE-RACTSS26": "Race to Stop Suicide 200 Winner",
@@ -61,6 +63,7 @@
     "KXNASCARRACE-TSP2PBW26": "TSport 200 presented by Warn Industries Winner",
     "KXNASCARRACE-UNO2PBO26": "UNOH 250 presented by Ohio Logistics Winner",
     "KXNASCARRACE-WIN2PB26": "Winn-Dixie 250 Powered by Coca-Cola  Winner",
+    "KXNASCARRACE-XFIN26": "Xfinity 500 Winner",
     "KXNASCARRACE-YEL26": "YellaWood 500 Winner",
     "KXNASCARRACE-ZERCB26": "Zero Carbon Bioethanol 150 Winner",
     "KXNASCARTOP10-BANOA26": "NASCAR Bank of America 400: Top 10 Finishers",
@@ -178,7 +181,7 @@
     "KXNASCARTRUCKSERIES-NTS26": "NASCAR Truck Series Champion"
   },
   "kalshi_seeded": true,
-  "last_checked": "2026-10-26T16:50:38+00:00",
+  "last_checked": "2026-10-26T21:14:26+00:00",
   "oddsapi": {},
   "oddsapi_seeded": true,
   "watching": {}
